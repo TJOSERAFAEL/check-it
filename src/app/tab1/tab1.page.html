@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Check It
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <ion-reorder-group disabled="false">
+       <ion-list-header>
+        <ion-text color="primary">
+          <h2>Today</h2>
+        </ion-text>
+      </ion-list-header>
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="radio-button-off"></ion-icon>
+        <ion-label>Task 1</ion-label>
+        <ion-reorder></ion-reorder>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="radio-button-off"></ion-icon>
+        <ion-label>Task 3</ion-label>
+        <ion-reorder></ion-reorder>
+      </ion-item>
+      <ion-list-header>
+        <ion-text color="primary">
+          <h2>Tomorrow</h2>
+        </ion-text>
+      </ion-list-header> 
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="radio-button-off"></ion-icon>
+        <ion-label>Task 4</ion-label>
+        <ion-reorder></ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
