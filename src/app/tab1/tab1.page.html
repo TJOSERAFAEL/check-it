@@ -8,30 +8,15 @@
 
 <ion-content>
   <ion-list lines="none">
-    <ion-reorder-group disabled="false">
+    <ion-reorder-group (ionItemReorder)="reorderTasks($event)" disabled="false">
        <ion-list-header>
         <ion-text color="primary">
           <h2>Today</h2>
         </ion-text>
       </ion-list-header>
-      <ion-item>
-        <ion-icon slot="start" color="medium" name="radio-button-off"></ion-icon>
-        <ion-label>Task 1</ion-label>
-        <ion-reorder></ion-reorder>
-      </ion-item>
-      <ion-item>
-        <ion-icon slot="start" color="medium" name="radio-button-off"></ion-icon>
-        <ion-label>Task 3</ion-label>
-        <ion-reorder></ion-reorder>
-      </ion-item>
-      <ion-list-header>
-        <ion-text color="primary">
-          <h2>Tomorrow</h2>
-        </ion-text>
-      </ion-list-header> 
-      <ion-item>
-        <ion-icon slot="start" color="medium" name="radio-button-off"></ion-icon>
-        <ion-label>Task 4</ion-label>
+      <ion-item *ngFor="let task of tasks">
+        <ion-icon slot="start" color="medium" [attr.name]="task.status == 'true' ? 'checkmark-circle-outline' : 'radio-button-off'" (click)="updateTask(task)"></ion-icon>
+        <ion-label><ion-text [attr.color]="task.status == 'true' ? 'light' : null">{{ task.name }}</ion-text></ion-label>
         <ion-reorder></ion-reorder>
       </ion-item>
     </ion-reorder-group>
