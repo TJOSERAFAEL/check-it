@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { TasksService } from '../services/tasks.service';
 import { ModalController } from '@ionic/angular';
-import { NewtaskPage } from '../newtask/newtask.page'
+import { NewtaskPage } from '../newtask/newtask.page';
 
 @Component({
   selector: 'app-tab1',
@@ -19,7 +19,6 @@ export class Tab1Page {
   }
 
   reorderTasks(ev) {
-    console.log(`Moving item from ${ev.detail.from} to ${ev.detail.to}`);
     this.taskService.saveTasks(this.tasks,ev.detail.from,ev.detail.to);
     ev.detail.complete();
   }

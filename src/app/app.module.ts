@@ -11,13 +11,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { NewtaskPage } from '../app/newtask/newtask.page'
+import { NewtaskPageModule } from '../app/newtask/newtask.module';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [AppComponent,NewtaskPage],
-  entryComponents: [NewtaskPage],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot({name: 'mydb'}), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),FormsModule],
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot({name: 'mydb'}), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),FormsModule,NewtaskPageModule],
   providers: [
     StatusBar,
     SplashScreen,
