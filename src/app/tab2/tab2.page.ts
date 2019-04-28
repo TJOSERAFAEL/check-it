@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { TasksService } from '../services/tasks.service';
+import { LabelsService } from '../services/labels.service';
 
 @Component({
   selector: 'app-tab2',
@@ -8,10 +8,12 @@ import { TasksService } from '../services/tasks.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  tasks: any;
+  labels: any;
 
-  constructor(public storage: Storage,private taskService: TasksService) {
-   
+  constructor(public storage: Storage,private labelService: LabelsService) {
+    this.labelService.getLabels().then((data) => {
+      this.labels = data;
+    });
   }
 
 }
