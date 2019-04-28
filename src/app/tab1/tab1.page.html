@@ -14,15 +14,16 @@
           <h2>Today</h2>
         </ion-text>
       </ion-list-header>
-      <ion-item *ngFor="let task of tasks">
+      <ion-item *ngFor="let task of tasks; let i = index">
         <ion-icon slot="start" color="medium" [attr.name]="task.status == 'true' ? 'checkmark-circle-outline' : 'radio-button-off'" (click)="updateTask(task)"></ion-icon>
+        <ion-icon slot="end" color="medium" *ngIf="task.status == 'true'" name="close" (click)="deleteTask(i)"></ion-icon>
         <ion-label><ion-text [attr.color]="task.status == 'true' ? 'light' : null">{{ task.name }}</ion-text></ion-label>
-        <ion-reorder></ion-reorder>
+        <ion-reorder *ngIf="task.status == 'false'"></ion-reorder>
       </ion-item>
     </ion-reorder-group>
   </ion-list>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="presentTaskModal()">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

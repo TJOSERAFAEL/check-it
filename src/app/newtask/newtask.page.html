@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+   
+    <ion-buttons slot="end">
+        <ion-button (click)="close()">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+
+    <ion-title>New task</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-input placeholder="Name" [(ngModel)]="name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea placeholder="Notes" [(ngModel)]="notes"></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="block" (click)="addTask()">Create Task</ion-button>
+
+
+</ion-content>

@@ -10,7 +10,6 @@ export class LabelsService {
   customLabels: any;
 
   setDefaultLabels() {
-    
     this.labels = [
                     {"name" : "Done","color" : "#32db64"},
                     {"name" : "High priority","color" : "#f53d3d"},
@@ -23,12 +22,17 @@ export class LabelsService {
   }
   
   constructor(public storage: Storage) {
-    this.setDefaultLabels();
+    this.storage.ready().then(() => {
+      this.setDefaultLabels();
+    });
   }
 
   async getLabels(){
-    return this.storage.get('labels').then((data) => {
-      return JSON.parse(data);
+    return this.storage.ready().then(() => {
+      return this.storage.get('labels').then((data) => {
+        return JSON.parse(data);
+      });
     });
   }
+
 }

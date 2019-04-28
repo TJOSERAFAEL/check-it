@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { TasksService } from '../services/tasks.service';
+import { ModalController } from '@ionic/angular';
+import { NewtaskPage } from '../newtask/newtask.page'
 
 @Component({
   selector: 'app-tab1',
@@ -10,10 +12,10 @@ import { TasksService } from '../services/tasks.service';
 export class Tab1Page {
   tasks: any;
 
-  constructor(public storage: Storage,private taskService: TasksService) {
-    this.taskService.getTasks().then((data) => {
+  constructor(public storage: Storage, public taskService: TasksService, public modalController: ModalController) {
+    this.taskService.getTasksObservable().subscribe((data) => {
       this.tasks = data;
-    });
+    }); 
   }
 
   reorderTasks(ev) {
@@ -23,7 +25,6 @@ export class Tab1Page {
   }
 
   updateTask(task) {
-
     if (task.status === "true") {
       task.status = "false";
     } else {
@@ -31,7 +32,17 @@ export class Tab1Page {
     }
 
     this.taskService.updateTaskStatus(task,task.name,task.status);
-    console.log("Task update");
+  }
+
+  async presentTaskModal() {
+    const modal = await this.modalController.create({
+      component: NewtaskPage
+    });
+    return await modal.present();
+  }
+
+  deleteTask(index: number){
+    this.taskService.deleteTaskByIndex(index);
   }
 
 }

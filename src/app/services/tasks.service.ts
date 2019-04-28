@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,20 @@ import { Storage } from '@ionic/storage';
 export class TasksService {
 
   tasks: any;
+  serviceObservable: any;
 
   constructor(public storage: Storage) { 
     this.getTasks().then((data) => {
       this.tasks = data;
+      if ( this.tasks == null ) {
+        this.tasks = [];
+      }
+    });
+
+    this.serviceObservable = new Observable((observer) => {
+      setInterval(() => {
+        observer.next(this.tasks);
+      },1000);
     });
   }
 
@@ -39,11 +50,16 @@ export class TasksService {
     this.storage.set('tasks',JSON.stringify(this.tasks));
   }
 
-  async addTask(name: string,date: string) {
-    var newTask = {"date" : date,"name" : name};
+  async addTask(name: string, date: string, notes: string) {
+    var newTask = {"date" : date,"name" : name, "notes": notes};
     this.tasks.push(newTask);
     this.storage.set('tasks',JSON.stringify(this.tasks));
   }
+
+  async deleteTaskByIndex(index: number) {
+    this.tasks.splice(index,1);
+    this.storage.set('tasks',JSON.stringify(this.tasks));
+  } 
 
   swapArray(Array:any, p1:number, p2:number) : any
   {
@@ -51,6 +67,10 @@ export class TasksService {
       Array[p1] = Array[p2];
       Array[p2] = temp;
       return Array;
+  }
+
+  public getTasksObservable(): Observable<any> {
+    return this.serviceObservable;
   }
 
 }
