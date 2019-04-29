@@ -56,9 +56,13 @@ export class Tab1Page {
     this.taskService.deleteTaskByIndex(index);
   }
 
-  getLabelColor(name: string): string {
-    var label = this.labelsService.getLabelColorByName(name);
+  getLabelColor(labelId: number): string {
+    var label = this.labelsService.getLabelColorById(labelId);
     return label;
+  }
+
+  getLabelName(labelId: number) {
+    return this.labelsService.getLabelNameById(labelId);
   }
 
 }

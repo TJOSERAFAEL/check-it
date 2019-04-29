@@ -27,7 +27,7 @@
           </ion-text>
         </ion-label>
         <ion-chip *ngIf="task.label != null" [style.background-color]="getLabelColor(task.label)">
-          <ion-label><ion-text color="light">{{ task.label }}</ion-text></ion-label>
+          <ion-label><ion-text color="light">{{ getLabelName(task.label) }}</ion-text></ion-label>
         </ion-chip>
         <ion-reorder *ngIf="task.status == 'false'"></ion-reorder>
       </ion-item>

@@ -16,4 +16,8 @@ export class Tab2Page {
     });
   }
 
+  updateLabelName(id: number, name: string) {
+    this.labelService.setLabelName(id,name);
+  }
+
 }

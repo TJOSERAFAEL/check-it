@@ -14,12 +14,10 @@
       </ion-text>
     </ion-list-header>
 
-    <ion-item *ngFor="let label of labels">
+    <ion-item *ngFor="let label of labels; let i = index">
       <ion-avatar slot="start" [style.background-color]="label.color">
       </ion-avatar>
-      <ion-label>
-        {{ label.name }}
-      </ion-label>
+      <ion-input (input)='updateLabelName(i,$event.target.value)' type="text" value="{{ label.name }}"></ion-input>
     </ion-item>
   </ion-list>
 

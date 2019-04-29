@@ -13,7 +13,7 @@ export class NewtaskPage implements OnInit {
   name: string;
   notes: string;
   labels: any;
-  labelName: string;
+  labelId: number;
 
   constructor(public modalController: ModalController,  private taskService: TasksService, private labelsService: LabelsService) { 
     this.labelsService.getLabels().then((data) => {
@@ -31,7 +31,7 @@ export class NewtaskPage implements OnInit {
 
   addTask() {
     var today = new Date();
-    this.taskService.addTask(this.name,today.toString(),this.notes,this.labelName);
+    this.taskService.addTask(this.name,today.toString(),this.notes,this.labelId);
     this.close();
   }
 

@@ -51,8 +51,8 @@ export class TasksService {
     this.storage.set('tasks',JSON.stringify(this.tasks));
   }
 
-  async addTask(name: string, date: string, notes: string, label: string) {
-    var newTask = {"date" : date,"name" : name, "notes": notes, "status" : 'false', "label" : label};
+  async addTask(name: string, date: string, notes: string, labelId: number) {
+    var newTask = {"date" : date,"name" : name, "notes": notes, "status" : 'false', "label" : labelId};
     this.tasks.push(newTask);
     this.storage.set('tasks',JSON.stringify(this.tasks));
   }

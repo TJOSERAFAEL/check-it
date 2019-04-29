@@ -6,18 +6,24 @@ import { Storage } from '@ionic/storage';
 })
 export class LabelsService {
 
-  labels : any = [
-    {"name" : "Done","color" : "#32db64"},
-    {"name" : "High priority","color" : "#f53d3d"},
-    {"name" : "Priority","color" : "#ffce00"},
-    {"name" : "Low priority","color" : "#7044ff"},
-    {"name" : "Work","color" : "#3880ff"}   
-  ];
-
+  labels : any = [];
   customLabels: any;
 
   setDefaultLabels() {
-    this.storage.set('labels',JSON.stringify(this.labels));
+    this.storage.get('labels').then((data) => {
+      if (data == null || data.length == 0) {
+        this.labels =  [
+          {"id": 0 ,"name" : "Done","color" : "#32db64"},
+          {"id": 1 ,"name" : "High priority","color" : "#f53d3d"},
+          {"id": 2 ,"name" : "Priority","color" : "#ffce00"},
+          {"id": 3 ,"name" : "Low priority","color" : "#7044ff"},
+          {"id": 4 ,"name" : "Work","color" : "#3880ff"}   
+        ];
+        this.storage.set('labels',JSON.stringify(this.labels));
+      } else {
+        this.labels = JSON.parse(data);
+      }
+    });
   }
   
   constructor(public storage: Storage) {
@@ -29,20 +35,22 @@ export class LabelsService {
   async getLabels() {
     return this.storage.ready().then(() => {
       return this.storage.get('labels').then((data) => {
+        this.labels = JSON.parse(data);
         return JSON.parse(data);
       });
     });
   }
 
-  getLabelColorByName(name: string) {
-    var color = null;
-    
-    this.labels.forEach( element => {
-      if(element.name == name) {
-        color = element.color;
-      }
-    });
+  getLabelColorById(id: number) {
+    return this.labels[id].color;
+  }
 
-    return color;
+  getLabelNameById(id :number) {
+    return this.labels[id].name;
+  }
+
+  setLabelName(id: number, name: string) {
+    this.labels[id].name = name;
+    this.storage.set('labels',JSON.stringify(this.labels));
   }
 }

@@ -27,7 +27,7 @@
       Label
     </ion-list-header>
 
-    <ion-radio-group [(ngModel)]="labelName">
+    <ion-radio-group [(ngModel)]="labelId">
       <div *ngFor="let label of labels">
         <ion-item>
           <ion-avatar slot="start" [style.background-color]="label.color">
@@ -35,7 +35,7 @@
           <ion-label>
             {{ label.name }}
           </ion-label>
-          <ion-radio slot="end" value="{{label.name}}"></ion-radio>
+          <ion-radio slot="end" value="{{label.id}}"></ion-radio>
         </ion-item>
       </div>
     </ion-radio-group>
