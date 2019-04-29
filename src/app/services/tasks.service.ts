@@ -19,6 +19,7 @@ export class TasksService {
     });
 
     this.serviceObservable = new Observable((observer) => {
+      observer.next(this.tasks);
       setInterval(() => {
         observer.next(this.tasks);
       },1000);
@@ -50,8 +51,8 @@ export class TasksService {
     this.storage.set('tasks',JSON.stringify(this.tasks));
   }
 
-  async addTask(name: string, date: string, notes: string) {
-    var newTask = {"date" : date,"name" : name, "notes": notes};
+  async addTask(name: string, date: string, notes: string, label: string) {
+    var newTask = {"date" : date,"name" : name, "notes": notes, "status" : 'false', "label" : label};
     this.tasks.push(newTask);
     this.storage.set('tasks',JSON.stringify(this.tasks));
   }

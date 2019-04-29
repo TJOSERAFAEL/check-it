@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TasksService } from '../services/tasks.service';
+import { LabelsService } from '../services/labels.service';
 
 @Component({
   selector: 'app-newtask',
@@ -12,8 +13,13 @@ export class NewtaskPage implements OnInit {
   name: string;
   notes: string;
   labels: any;
+  labelName: string;
 
-  constructor(public modalController: ModalController,  private taskService: TasksService) { }
+  constructor(public modalController: ModalController,  private taskService: TasksService, private labelsService: LabelsService) { 
+    this.labelsService.getLabels().then((data) => {
+      this.labels = data;
+    });
+  }
 
   ngOnInit() {
 
@@ -25,7 +31,7 @@ export class NewtaskPage implements OnInit {
 
   addTask() {
     var today = new Date();
-    this.taskService.addTask(this.name,today.toString(),this.notes);
+    this.taskService.addTask(this.name,today.toString(),this.notes,this.labelName);
     this.close();
   }
 

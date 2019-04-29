@@ -9,15 +9,26 @@
 <ion-content>
   <ion-list lines="none">
     <ion-reorder-group (ionItemReorder)="reorderTasks($event)" disabled="false">
-       <ion-list-header>
+      <ion-list-header>
         <ion-text color="primary">
           <h2>Today</h2>
         </ion-text>
       </ion-list-header>
-      <ion-item *ngFor="let task of tasks; let i = index">
-        <ion-icon slot="start" color="medium" [attr.name]="task.status == 'true' ? 'checkmark-circle-outline' : 'radio-button-off'" (click)="updateTask(task)"></ion-icon>
-        <ion-icon slot="end" color="medium" *ngIf="task.status == 'true'" name="close" (click)="deleteTask(i)"></ion-icon>
-        <ion-label><ion-text [attr.color]="task.status == 'true' ? 'light' : null">{{ task.name }}</ion-text></ion-label>
+      <ion-item *ngFor="let task of tasks; let i = index" @taskState>
+        <ion-icon slot="start" color="medium"
+          [attr.name]="task.status == 'true' ? 'checkmark-circle-outline' : 'radio-button-off'"
+          (click)="updateTask(task)"></ion-icon>
+        <ion-icon slot="end" color="medium" *ngIf="task.status == 'true'" name="close" (click)="deleteTask(i)">
+        </ion-icon>
+        <ion-label>
+          <ion-text [attr.color]="task.status == 'true' ? 'medium' : null">
+            <div *ngIf="task.status == 'true'" class="line-through">{{ task.name }}</div>
+            <div *ngIf="task.status == 'false'">{{ task.name }}</div>
+          </ion-text>
+        </ion-label>
+        <ion-chip *ngIf="task.label != null" [style.background-color]="getLabelColor(task.label)">
+          <ion-label><ion-text color="light">{{ task.label }}</ion-text></ion-label>
+        </ion-chip>
         <ion-reorder *ngIf="task.status == 'false'"></ion-reorder>
       </ion-item>
     </ion-reorder-group>

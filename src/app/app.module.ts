@@ -12,12 +12,13 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NewtaskPageModule } from '../app/newtask/newtask.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot({name: 'mydb'}), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),FormsModule,NewtaskPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,IonicStorageModule.forRoot({name: 'mydb'}), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),FormsModule,NewtaskPageModule,BrowserAnimationsModule],
   providers: [
     StatusBar,
     SplashScreen,

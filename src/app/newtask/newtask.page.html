@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar>
-   
+
     <ion-buttons slot="end">
-        <ion-button (click)="close()">
-            <ion-icon slot="icon-only" name="close"></ion-icon>
-        </ion-button>
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
 
     <ion-title>New task</ion-title>
@@ -14,12 +14,32 @@
 <ion-content>
 
   <ion-item>
-    <ion-input placeholder="Name" [(ngModel)]="name"></ion-input>
+    <ion-input placeholder="Name" [(ngModel)]="name" required></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-textarea placeholder="Notes" [(ngModel)]="notes"></ion-textarea>
+    <ion-textarea placeholder="Notes" [(ngModel)]="notes" required></ion-textarea>
   </ion-item>
+
+  <ion-list>
+
+    <ion-list-header>
+      Label
+    </ion-list-header>
+
+    <ion-radio-group [(ngModel)]="labelName">
+      <div *ngFor="let label of labels">
+        <ion-item>
+          <ion-avatar slot="start" [style.background-color]="label.color">
+          </ion-avatar>
+          <ion-label>
+            {{ label.name }}
+          </ion-label>
+          <ion-radio slot="end" value="{{label.name}}"></ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+  </ion-list>
 
   <ion-button expand="block" (click)="addTask()">Create Task</ion-button>
 
