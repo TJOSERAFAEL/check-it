@@ -7,41 +7,52 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>New task</ion-title>
+    <ion-title>{{ 'PAGES.NEWTASK.NEW_TASK' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
+  <ion-grid fixed>
+    <ion-item>
+      <ion-input placeholder="{{ 'PAGES.NEWTASK.NAME' | translate }}" [(ngModel)]="name" autocapitalize="true" required></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-input placeholder="Name" [(ngModel)]="name" required></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-textarea placeholder="{{ 'PAGES.NEWTASK.NOTES' | translate }}" [(ngModel)]="notes" autocapitalize="true" ></ion-textarea>
+    </ion-item>
 
-  <ion-item>
-    <ion-textarea placeholder="Notes" [(ngModel)]="notes" required></ion-textarea>
-  </ion-item>
+    <ion-item>
+      <ion-label>{{ 'PAGES.NEWTASK.REMIND' | translate }}</ion-label>
+      <ion-toggle [(ngModel)]="remind"></ion-toggle>
+    </ion-item>
 
-  <ion-list>
+    <ion-item *ngIf="remind == true">
+      <ion-icon name="alarm"></ion-icon>
+      <ion-label>{{ 'PAGES.NEWTASK.HOUR' | translate }}</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)]="hour"></ion-datetime>
+    </ion-item>
 
-    <ion-list-header>
-      Label
-    </ion-list-header>
+    <ion-list>
+      <ion-list-header>
+        {{ 'PAGES.NEWTASK.LABEL' | translate }}
+      </ion-list-header>
 
-    <ion-radio-group [(ngModel)]="labelId">
-      <div *ngFor="let label of labels">
-        <ion-item>
-          <ion-avatar slot="start" [style.background-color]="label.color">
-          </ion-avatar>
-          <ion-label>
-            {{ label.name }}
-          </ion-label>
-          <ion-radio slot="end" value="{{label.id}}"></ion-radio>
-        </ion-item>
-      </div>
-    </ion-radio-group>
-  </ion-list>
+      <ion-radio-group [(ngModel)]="labelId">
+        <div *ngFor="let label of labels">
+          <ion-item>
+            <ion-avatar slot="start" [style.background-color]="label.color">
+            </ion-avatar>
+            <ion-label>
+              {{ label.name }}
+            </ion-label>
+            <ion-radio slot="end" value="{{label.id}}"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+    </ion-list>
 
-  <ion-button expand="block" (click)="addTask()">Create Task</ion-button>
-
+    <ion-button expand="block" (click)="addTask()">{{ 'PAGES.NEWTASK.BTN_CREATE_TASK' | translate }}</ion-button>
+  </ion-grid>
 
 </ion-content>

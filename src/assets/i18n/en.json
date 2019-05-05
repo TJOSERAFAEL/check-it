@@ -1,0 +1,23 @@
+{
+    "PAGES": {
+        "TAB1": {
+            "TODAY": "Today"
+          },
+          "NEWTASK": {
+            "NEW_TASK": "New task",
+            "NAME": "Name",
+            "NOTES": "Notes",
+            "REMIND": "Reminder",
+            "HOUR": "Hour",
+            "LABEL": "Label",
+            "REQUIRED": "Required",
+            "NAME_REQUIRED": "Field name is required",
+            "NAME_DUPLICATED": "The task already exists",
+            "BTN_CREATE_TASK": "Create Task"
+          },
+          "TABS": {
+            "TASKS": "Tasks",
+            "LABELS": "Labels"
+          }
+        }
+  }

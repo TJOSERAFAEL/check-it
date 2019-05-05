@@ -4,6 +4,8 @@ import { TasksService } from '../services/tasks.service';
 import { ModalController } from '@ionic/angular';
 import { NewtaskPage } from '../newtask/newtask.page';
 import { LabelsService } from '../services/labels.service';
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -22,13 +24,15 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     ])
   ]
 })
+
 export class Tab1Page {
   tasks: any;
 
-  constructor(public storage: Storage, public taskService: TasksService, public modalController: ModalController, private labelsService: LabelsService) {
+  constructor(public storage: Storage, public taskService: TasksService, public modalController: ModalController, private labelsService: LabelsService, public toastController: ToastController, private _translate: TranslateService) {
     this.taskService.getTasksObservable().subscribe((data) => {
       this.tasks = data;
     });
+    this.taskReminder();
   }
 
   reorderTasks(ev) {
@@ -63,6 +67,55 @@ export class Tab1Page {
 
   getLabelName(labelId: number) {
     return this.labelsService.getLabelNameById(labelId);
+  }
+
+  taskReminder() {
+    setInterval(() => {
+      if ( this.tasks ) {
+        this.tasks.forEach( task => {
+          if ( task.hour ) {
+            var now = new Date();
+            var hour: string;
+            var minute: string;
+
+            if (now.getHours() < 10) {
+              hour = '0' + now.getHours();
+            } else {
+              hour = now.getHours() .toString();
+            }
+
+            if (now.getMinutes() < 10) {
+              minute = '0' + now.getMinutes();
+            } else {
+              minute = now.getMinutes().toString();
+            }
+
+            var hourMinutes = hour + ':' + minute;
+            
+            /* Reminder toast */
+            if((now.toDateString() == task.date) && (hourMinutes == task.hour)) {
+              this.presentReminderToast(task.name);
+            }
+          }
+        });
+      }
+    },60000);
+  }
+
+  async presentReminderToast(message: string) {
+    const toast = await this.toastController.create({
+      header: 'Reminder',
+      message: message,
+      position: 'top',
+      buttons: [
+        {
+          side: 'end',
+          icon: 'close',
+          role: 'cancel'
+        }
+      ]
+    });
+    toast.present();
   }
 
 }

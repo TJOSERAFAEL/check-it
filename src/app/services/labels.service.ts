@@ -17,7 +17,10 @@ export class LabelsService {
           {"id": 1 ,"name" : "High priority","color" : "#f53d3d"},
           {"id": 2 ,"name" : "Priority","color" : "#ffce00"},
           {"id": 3 ,"name" : "Low priority","color" : "#7044ff"},
-          {"id": 4 ,"name" : "Work","color" : "#3880ff"}   
+          {"id": 4 ,"name" : "Work","color" : "#3880ff"},
+          {"id": 5 ,"name" : "Employee","color" : "#886aea"},
+          {"id": 6 ,"name" : "Other","color" : "#989aa2"},
+          {"id": 7 ,"name" : "Personal","color" : "#010101"},
         ];
         this.storage.set('labels',JSON.stringify(this.labels));
       } else {

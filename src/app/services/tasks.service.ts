@@ -51,8 +51,21 @@ export class TasksService {
     this.storage.set('tasks',JSON.stringify(this.tasks));
   }
 
-  async addTask(name: string, date: string, notes: string, labelId: number) {
-    var newTask = {"date" : date,"name" : name, "notes": notes, "status" : 'false', "label" : labelId};
+  async addTask(name: string, date: string, notes: string, labelId: number, hour: string) {
+    var newTask = {"date" : date,"name" : name, "notes": notes, "status" : 'false', "label" : labelId, "hour": hour};
+
+    /* Search for repeated name */
+    var found = 0;
+    this.tasks.forEach(task => {
+      if (task.name == name) {
+        found = 1;
+      }
+    });
+
+    if ( found ) {
+      throw new Error('Name already exists');
+    }
+    
     this.tasks.push(newTask);
     this.storage.set('tasks',JSON.stringify(this.tasks));
   }

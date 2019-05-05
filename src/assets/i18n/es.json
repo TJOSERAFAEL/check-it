@@ -1,0 +1,23 @@
+{
+    "PAGES": {
+        "TAB1": {
+            "TODAY": "Hoy"
+          },
+          "NEWTASK": {
+            "NEW_TASK": "Nueva tarea",
+            "NAME": "Nombre",
+            "NOTES": "Notas",
+            "REMIND": "Recordar",
+            "HOUR": "Hora",
+            "LABEL": "Etiqueta",
+            "REQUIRED": "Requerido",
+            "NAME_REQUIRED": "El campo nombre es requerido",
+            "NAME_DUPLICATED": "La tarea ya existe",
+            "BTN_CREATE_TASK": "Crear Tarea"
+          },
+          "TABS": {
+            "TASKS": "Tareas",
+            "LABELS": "Etiquetas"
+          }
+        }
+  }
